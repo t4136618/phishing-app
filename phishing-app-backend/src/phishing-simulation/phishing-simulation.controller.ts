@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {Body, Controller, Get, HttpException, Param, Post} from '@nestjs/common';
 import { PhishingSimulationService } from "./phishing-simulation.service";
+import { isValidObjectId } from "mongoose";
 
 @Controller('phishing')
 export class PhishingSimulationController {
@@ -15,5 +16,14 @@ export class PhishingSimulationController {
     trackEmailOpen(@Param('emailId') emailId: string) {
         this.phishingSimulationService.markAsOpened(emailId);
         return 'Tracked';
+    }
+
+    @Get('status/:emailId')
+    async getEmailStatus(@Param('emailId') emailId: string) {
+        if(isValidObjectId(emailId)) {
+            const status = await this.phishingSimulationService.getEmailStatus(emailId);
+            return {status}
+        }
+        return new HttpException('Id is not valid', 400)
     }
 }

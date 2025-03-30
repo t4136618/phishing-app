@@ -60,4 +60,9 @@ export class PhishingSimulationService {
             console.error('Error sending email:', error);
         }
     }
+
+    async getEmailStatus(emailId: string) {
+        const email = await this.phishingEmailModel.findById(emailId);
+        return email.isOpened  ? 'Opened': 'Never Opened'
+    }
 }
