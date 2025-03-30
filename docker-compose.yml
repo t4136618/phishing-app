@@ -11,7 +11,7 @@ services:
       - phishing_network
 
   backend:
-    build: ./phishing-app-backend
+    build: phishing-app-backend
     container_name: backend
     restart: always
     depends_on:

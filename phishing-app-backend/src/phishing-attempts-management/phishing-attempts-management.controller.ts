@@ -1,4 +1,5 @@
-import { Controller } from '@nestjs/common';
+import {Controller} from '@nestjs/common';
 
 @Controller('phishing-attempts-management')
-export class PhishingAttemptsManagementController {}
+export class PhishingAttemptsManagementController {
+}
